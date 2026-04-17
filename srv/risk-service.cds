@@ -40,7 +40,15 @@ annotate  RiskService.Mitigations with @(UI:{
             { Value : title},
             { Value : owner},
             { Value : descr},
+        ],
+        FieldGroup #Mitigation : {
+        Data : [
+            { Value : ID },
+            { Value : descr },
+            { Value : owner},
+            { Value : timeline }
         ]
+    },
         
            
        },
@@ -107,7 +115,7 @@ annotate riskmanagement.Risks with @(
         {
             $Type : 'UI.ReferenceFacet',
             Label : 'Mitigations',
-            Target : 'miti/@UI.FieldGroup#Mitigation',
+            Target : 'miti/@UI.FieldGroup#Risks',
         }
         
     ],
@@ -133,12 +141,4 @@ annotate riskmanagement.Risks with @(
         ]
     },
 
-     FieldGroup #Mitigation : {
-        Data : [
-            { Value : ID },
-            { Value : descr },
-            { Value : owner},
-            { Value : timeline }
-        ]
-    },
 );
