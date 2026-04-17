@@ -19,6 +19,51 @@ annotate Mitigations with @odata.draft.enabled;
 
 }
 // UI annotations to enable color--
+annotate  RiskService.Mitigations with @(UI:{
+    LineItem    : [
+        { Value : ID },
+            { Value : descr },
+            { Value : owner},
+            { Value : timeline }
+    ],
+      FieldGroup #creators  : {
+          Data : [
+            { Value :createdAt },
+            { Value : createdBy },
+            { Value : modifiedAt },
+            { Value : modifiedBy},
+          ]
+      },
+       FieldGroup #Risks : {
+        Data : [
+            { Value : ID },
+            { Value : title},
+            { Value : owner},
+            { Value : descr},
+        ]
+        
+           
+       },
+
+    Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Main Information',
+            Target : 'risks/@UI.LineItem',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Creators',
+            Target : '@UI.FieldGroup#creators',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Risks',
+            Target : '@UI.FieldGroup#Risks',
+        },
+    ]
+});
+
 
 annotate riskmanagement.Risks with @(
     UI.LineItem    : [
@@ -52,7 +97,19 @@ annotate riskmanagement.Risks with @(
             $Type : 'UI.ReferenceFacet',
             Label : 'Main Information',
             Target : '@UI.FieldGroup#Main',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Admin Information',
+            Target : '@UI.FieldGroup#AdminDataData',
+        },
+        
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Mitigations',
+            Target : 'miti/@UI.FieldGroup#Mitigation',
         }
+        
     ],
    
     UI.FieldGroup #Main : {
@@ -65,5 +122,23 @@ annotate riskmanagement.Risks with @(
             },
             { Value : impact }
         ]
-    }
+    },
+
+        UI.FieldGroup #AdminDataData : {
+        Data : [
+            { Value : createdAt },
+            { Value : createdBy },
+            { Value : modifiedBy},
+            { Value : modifiedAt }
+        ]
+    },
+
+     FieldGroup #Mitigation : {
+        Data : [
+            { Value : ID },
+            { Value : descr },
+            { Value : owner},
+            { Value : timeline }
+        ]
+    },
 );
